@@ -1,12 +1,15 @@
-name:CI
-
+#NAME: NOMBRE DEL PIPELINE
+name: CI
+#ON: PASO PARA CONFIGURACION DE TRIGGER, LOS EVENTOS DISPONIBLE LOS CONSEGUIMOS COLCOANDO EN GOOGLE  
+#EVENTS-THAT-TRIGGER-WORKFLOWS
 on:
- push:
-
+ push:    #PUSH: UNICO TRIGER CONFIGURADO EN ESTA PIPELINE
+ 
+#JOBS: ES EL FLUJO DE TRABAJO, EL ORDEN EN QUE SE EJECUTAN LOS PASOS DE LA PIPELINE   
 jobs:
-  
+  #BUILD:  
   build:
-
+       # 
        runs-on: ubuntu-latest
 
        steps:
@@ -17,6 +20,7 @@ jobs:
          - name: Setup Java JDK
            uses: actions/setup-java@main
            with:
+            #java-version: '17'
              java-version: '8'
              distribution: 'temurin'
              
@@ -24,11 +28,24 @@ jobs:
            run: |
                  mvn package
 
-         -name: Analisis SonarCloud
-          run: |
-            mvn clean verify sonar:sonar \
-            -Dsonar.token=${{secrets.SONAR_TOKEN}} \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.organization=cmendo \
-            -Dsonar.projectKey=cmendo_ms-aumento-voto
+         #- name: Analisis SonarCloud
+          # run: |
+           # mvn clean verify sonar:sonar \
+           # -Dsonar.token=${{secrets.SONAR_TOKEN}} \
+           # -Dsonar.host.url=https://sonarcloud.io \
+           # -Dsonar.organization=cmendo \
+           # -Dsonar.projectKey=cmendo_ms-aumento-voto
+           
+         - name: Docker Login
+           uses: docker/login-action@v3.1.0
+           with:
+             username: cmendoza83
+             password: ${{ secrets.DOCKER_PASS }}
+           
+         - name: Docker build
+           run:
+                docker build -t usach/ms-aumento-voto:lates .
           
+         - name: Docker push
+           run:
+                  docker push usach/ms-aumento-voto:lates
