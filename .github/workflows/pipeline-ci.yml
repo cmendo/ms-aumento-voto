@@ -21,5 +21,14 @@ jobs:
              distribution: 'temurin'
              
          - name: Compilacion
-           run: 
+           run: |
                  mvn package
+
+         -name: Analisis SonarCloud
+          run: |
+            mvn clean verify sonar:sonar \
+            -Dsonar.token=${{secrets.SONAR_TOKEN}} \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.organization=cmendo \
+            -Dsonar.projectKey=cmendo_ms-aumento-voto
+          
