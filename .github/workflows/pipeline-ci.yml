@@ -1,19 +1,25 @@
 name:CI
 
 on:
- 
-  push:
+ push:
 
- jobs:
+jobs:
   
-   build:
+  build:
 
        runs-on: ubuntu-latest
 
        steps:
-
-         -uses: actions/checkout@v3
-
-         -name: Run a multi-line script
-          run: |
-            echo:"hola mu ndo"
+       
+         - name: Clonacion de codigo
+           uses: actions/checkout@v4
+           
+         - name: Setup Java JDK
+           uses: actions/setup-java@main
+           with:
+             java-version: '8'
+             distribution: 'temurin'
+             
+         - name: Compilacion
+           run: 
+                 mvn package
