@@ -17,20 +17,31 @@ jobs:
        runs-on: ubuntu-latest
        #STEPS: PASOS A EJECUTAR DENTRO DEL JOBS, PUEDEN SER MAS DE UNO
        steps:
-         #actions/: son librerias para simplificar la construccion del codigo de la pipeline
-         - name: Clonacion de codigo
-           uses: actions/checkout@v4
+
+          - uses: actions/checkout@v3
+
+          - name: Hola mundo
+            run: |
+              echo "Hola mundo"
+
+          - name: Hola mundo 2
+            run: |
+              echo "Hola mundo 2"
            
-         - name: Setup Java JDK
-           uses: actions/setup-java@main
-           with:
+         #actions/: son librerias para simplificar la construccion del codigo de la pipeline
+         #- name: Clonacion de codigo
+           #uses: actions/checkout@v4
+           
+         #- name: Setup Java JDK
+           #uses: actions/setup-java@main
+           #with:
             #java-version: '17'
-             java-version: '8'
-             distribution: 'temurin'
+             #java-version: '8'
+             #distribution: 'temurin'
              
-         - name: Compilacion
-           run: |
-                 mvn package
+         #- name: Compilacion
+           #run: |
+                 #mvn package
 
          #- name: Analisis SonarCloud
           # run: |
@@ -40,16 +51,16 @@ jobs:
            # -Dsonar.organization=cmendo \
            # -Dsonar.projectKey=cmendo_ms-aumento-voto
            
-         - name: Docker Login
-           uses: docker/login-action@v3.1.0
-           with:
-             username: cmendoza83
-             password: ${{ secrets.DOCKER_PASS }}
+         #- name: Docker Login
+           #uses: docker/login-action@v3.1.0
+           #with:
+             #username: cmendoza83
+             #password: ${{ secrets.DOCKER_PASS }}
            
-         - name: Docker build
-           run:
-                docker build -t usach/ms-aumento-voto:lates .
+         #- name: Docker build
+           #run:
+                #docker build -t usach/ms-aumento-voto:lates .
           
-         - name: Docker push
-           run:
-                  docker push usach/ms-aumento-voto:lates
+         #- name: Docker push
+           #run:
+                  #docker push usach/ms-aumento-voto:lates
