@@ -1,19 +1,23 @@
 #NAME: NOMBRE DEL PIPELINE
 name: CI
-#ON: PASO PARA CONFIGURACION DE TRIGGER, LOS EVENTOS DISPONIBLE LOS CONSEGUIMOS COLCOANDO EN GOOGLE  
+#ON: PASO PARA CONFIGURACION DE TRIGGER O EVENTOS, LOS EVENTOS DISPONIBLE LOS CONSEGUIMOS COLCOANDO EN GOOGLE  
 #EVENTS-THAT-TRIGGER-WORKFLOWS
 on:
- push:    #PUSH: UNICO TRIGER CONFIGURADO EN ESTA PIPELINE
+ push:    #PUSH: UNICO TRIGER O EVENTO CONFIGURADO EN ESTA PIPELINE
  
-#JOBS: ES EL FLUJO DE TRABAJO, EL ORDEN EN QUE SE EJECUTAN LOS PASOS DE LA PIPELINE   
+#JOBS: ES EL FLUJO DE TRABAJO, EL ORDEN EN QUE SE EJECUTAN LOS PASOS DE LA PIPELINE 
+#OJO CON LA IDENTACION
 jobs:
-  #BUILD:  
+  #BUILD(Nombre del jobs, todo va identado para identificar las partes de la pipeline)
+  #Una pipeline puede tener varios jobs:  
   build:
-       # 
+       #runs-on: son maquinas, bien sean fisicas o VM, onpremise o en la nube 
+       #que van a ejecutar las instrucciones de la pipeline o las compilaciones
+       #en github son runs-on, en jenkins y otras herramientas son agentes
        runs-on: ubuntu-latest
-
+       #STEPS: PASOS A EJECUTAR DENTRO DEL JOBS, PUEDEN SER MAS DE UNO
        steps:
-       
+         #actions/: son librerias para simplificar la construccion del codigo de la pipeline
          - name: Clonacion de codigo
            uses: actions/checkout@v4
            
