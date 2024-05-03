@@ -1,30 +1,30 @@
-name: Build
+#name: Build
 
-on:
-  release:
-    types: [created]
+#on:
+ # release:
+  #  types: [created]
 
-jobs:
-  build:
+#jobs:
+ # build:
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+  #  runs-on: ubuntu-latest
+   # permissions:
+    #  contents: read
+     # packages: write
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 
-      uses: actions/setup-java@v3
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+ #   steps:
+  #  - uses: actions/checkout@v3
+   # - name: Set up JDK 
+    #  uses: actions/setup-java@v3
+     # with:
+      #  java-version: '8'
+       # distribution: 'temurin'
+        #server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        #settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Maven
-      run: mvn package --file pom.xml
-
+#    - name: Build with Maven
+ #     run: mvn package --file pom.xml
+#
     #- name: Publish to GitHub Packages Apache Maven
       #run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       #env:
